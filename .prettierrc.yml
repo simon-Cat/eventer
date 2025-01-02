@@ -5,3 +5,4 @@ trailingComma: "es5"
 bracketSpacing: true
 bracketSameLine: false
 singleAttributePerLine: true
+printWidth: 90
