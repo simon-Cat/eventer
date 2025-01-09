@@ -1,7 +1,8 @@
-import Style from '@/app/components/EventCard/EventCard.module.css'
+import Style from '@/app/components/EventCardList/EventCard/EventCard.module.css'
 import { IEvent } from '@/app/types/types'
 
 export default function EventCard({
+  id,
   image,
   title,
   description,
@@ -11,6 +12,7 @@ export default function EventCard({
   const creationDate = createdAt
     .toLocaleString('ru-Ru', { timeZone: 'UTC' })
     .split(', ')[0]
+  
   return (
     <div className={Style.card}>
       <img
@@ -22,7 +24,7 @@ export default function EventCard({
       <p>{description}</p>
       <p>Location: {location}</p>
       <p>Created at: {creationDate}</p>
-      <div style={{ display: 'flex', gap: '5px' }}>
+      <div className={Style.buttons}>
         <button>Delete</button>
         <button>Edit</button>
       </div>
