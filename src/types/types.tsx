@@ -4,16 +4,7 @@ export interface IEvent {
   title: string
   description: string
   location: string
-  createdAt: Date
+  createdAt: string
 }
 
 export type Events = [] | IEvent[]
-
-export interface IEventListProps {
-  events: Events
-}
-
-export interface IFormProps {
-  submitHandler(arg: IEvent): void
-}
-
