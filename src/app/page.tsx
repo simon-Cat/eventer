@@ -1,21 +1,18 @@
 'use client'
-import { useState } from 'react'
-import CustomForm from '@/app/components/CustomForm/CustomForm'
-import EventCardList from '@/app/components/EventCardList/EventCardList'
-import { IEvent, Events } from '@/app/types/types'
+import CustomForm from '@/components/CustomForm/CustomForm'
+import EventCardList from '@/components/EventCardList/EventCardList'
+import { Provider } from 'react-redux'
+import { store } from '@/redux/store'
 
-export default function Home() {
-  const [events, setEvents] = useState<Events>([])
-  const createNewEvent = (newEvent: IEvent): void => {
-    const eventsCopy: IEvent[] = events.slice()
-    eventsCopy.push(newEvent)
-    setEvents(eventsCopy)
-  }
-  
+export default function App() {
   return (
-    <div>
-      <CustomForm submitHandler={createNewEvent} />
-      <EventCardList events={events} />
-    </div>
+    <>
+      <Provider store={store}>
+        <main>
+          <CustomForm />
+          <EventCardList />
+        </main>
+      </Provider>
+    </>
   )
 }
