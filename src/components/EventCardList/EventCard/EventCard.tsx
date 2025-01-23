@@ -1,18 +1,18 @@
-import Style from '@/app/components/EventCardList/EventCard/EventCard.module.css'
-import { IEvent } from '@/app/types/types'
+import Style from './EventCard.module.css'
+import { IEvent } from '@/types/types'
 
 export default function EventCard({
-  id,
   image,
   title,
   description,
   location,
   createdAt,
 }: IEvent) {
-  const creationDate = createdAt
-    .toLocaleString('ru-Ru', { timeZone: 'UTC' })
-    .split(', ')[0]
-  
+  const getFormattedEventDate = () => {
+    const eventDate = new Date(JSON.parse(createdAt))
+    return eventDate.toLocaleString('ru-Ru', { timeZone: 'UTC' }).split(', ')[0]
+  }
+
   return (
     <div className={Style.card}>
       <img
@@ -23,7 +23,7 @@ export default function EventCard({
       <h2>{title}</h2>
       <p>{description}</p>
       <p>Location: {location}</p>
-      <p>Created at: {creationDate}</p>
+      <p>Created at: {getFormattedEventDate()}</p>
       <div className={Style.buttons}>
         <button>Delete</button>
         <button>Edit</button>

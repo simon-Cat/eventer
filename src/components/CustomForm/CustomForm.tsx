@@ -1,9 +1,12 @@
-import Style from '@/app/components/CustomForm/CustomForm.module.css'
+import Style from './CustomForm.module.css'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { IFormProps, IEvent } from '@/app/types/types'
+import { IEvent } from '@/types/types'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { addEvent } from '@/redux/slices/eventsSlice'
 
-export default function CustomForm({ submitHandler }: IFormProps) {
+export default function CustomForm() {
+  const dispatch = useDispatch()
   const {
     register,
     reset,
@@ -12,10 +15,11 @@ export default function CustomForm({ submitHandler }: IFormProps) {
   } = useForm<IEvent>()
 
   const submitForm: SubmitHandler<IEvent> = (formData) => {
-    const createdDate = new Date()
-    const randomId = Math.random() * 100
+    const createdDate = JSON.stringify(new Date())
+    const randomId = +(Math.random() * 100).toFixed()
     const eventData: IEvent = { ...formData, createdAt: createdDate, id: randomId }
-    submitHandler(eventData)
+
+    dispatch(addEvent(eventData))
   }
 
   useEffect(() => {
@@ -39,18 +43,18 @@ export default function CustomForm({ submitHandler }: IFormProps) {
         type="text"
         {...register('title', { required: true })}
       />
-      {errors.title && <span className={Style.error}>Required insert event's title</span>}
+      {errors.title && <span className={Style.error}>Required insert title</span>}
 
       <textarea
         {...register('description', { required: true })}
       />
-      {errors.description && <span className={Style.error}>Required insert event's description</span>}
+      {errors.description && <span className={Style.error}>Required insert description</span>}
 
       <input
         type="text"
         {...register('location', { required: true })}
       />
-      {errors.location && <span className={Style.error}>Required insert event's location</span>}
+      {errors.location && <span className={Style.error}>Required insert location</span>}
 
       <button type="submit">Создать</button>
     </form>
