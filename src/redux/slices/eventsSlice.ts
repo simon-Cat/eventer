@@ -20,8 +20,12 @@ export const eventsSlice = createSlice({
     addEvent: (state, action: PayloadAction<IEvent>) => {
       state.events = [...state.events, action.payload]
     },
+    deleteEvent: (state, action: PayloadAction<number>) => {
+      const idOfDeletedEvent = action.payload
+      state.events = state.events.filter((event) => event.id !== idOfDeletedEvent)
+    },
   },
 })
 
-export const { setEvents, addEvent } = eventsSlice.actions
+export const { setEvents, addEvent, deleteEvent } = eventsSlice.actions
 export default eventsSlice.reducer
