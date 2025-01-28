@@ -2,6 +2,8 @@ import Style from './EventCard.module.css'
 import { IEvent } from '@/types/types'
 import { deleteEvent } from '@/redux/slices/eventsSlice'
 import { useDispatch } from 'react-redux'
+import { selectEventForUpdating } from '@/redux/slices/eventsSlice'
+import { openPopup } from '@/redux/slices/popupSlice'
 
 export default function EventCard({ eventData }: {eventData :IEvent}) {
   const dispatch = useDispatch()
@@ -11,6 +13,10 @@ export default function EventCard({ eventData }: {eventData :IEvent}) {
   }
   const handleDeleteEvent = () => {
     dispatch(deleteEvent(eventData.id))
+  }
+  const handleEditEvent = () => {
+    dispatch(selectEventForUpdating(eventData))
+    dispatch(openPopup({title: 'Изменить событие', variant: 'event_edit'}))
   }
 
   return (
@@ -26,7 +32,7 @@ export default function EventCard({ eventData }: {eventData :IEvent}) {
       <p>Created at: {getFormattedEventDate()}</p>
       <div className={Style.buttons}>
         <button onClick={handleDeleteEvent}>Delete</button>
-        <button>Edit</button>
+        <button onClick={handleEditEvent}>Edit</button>
       </div>
     </div>
   )
