@@ -5,6 +5,7 @@ export interface IEvent {
   description: string
   location: string
   createdAt: string
+  updateAt?: string
 }
 
 export type Events = [] | IEvent[]
