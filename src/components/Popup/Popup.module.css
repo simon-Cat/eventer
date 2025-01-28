@@ -1,0 +1,26 @@
+.popupOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupOverlay_hidden {
+  visibility: hidden;
+}
+
+.popupContainer {
+  width: 100%;
+  max-width: 960px;
+  height: 450px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px 15px;
+}
+
+.popupContainer__title {
+  text-align: center;
+  text-transform: uppercase;
+}
