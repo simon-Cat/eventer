@@ -3,33 +3,26 @@ import { IEvent } from '@/types/types'
 import { deleteEvent } from '@/redux/slices/eventsSlice'
 import { useDispatch } from 'react-redux'
 
-export default function EventCard({
-  id,
-  image,
-  title,
-  description,
-  location,
-  createdAt,
-}: IEvent) {
+export default function EventCard({ eventData }: {eventData :IEvent}) {
   const dispatch = useDispatch()
   const getFormattedEventDate = () => {
-    const eventDate = new Date(JSON.parse(createdAt))
+    const eventDate = new Date(JSON.parse(eventData.createdAt))
     return eventDate.toLocaleString('ru-Ru', { timeZone: 'UTC' }).split(', ')[0]
   }
   const handleDeleteEvent = () => {
-    dispatch(deleteEvent(id))
+    dispatch(deleteEvent(eventData.id))
   }
 
   return (
     <div className={Style.card}>
       <img
         className={Style.image}
-        src={image}
-        alt={`Image of ${title} event`}
+        src={eventData.image}
+        alt={`Image of ${eventData.title} event`}
       />
-      <h2>{title}</h2>
-      <p>{description}</p>
-      <p>Location: {location}</p>
+      <h2>{eventData.title}</h2>
+      <p>{eventData.description}</p>
+      <p>Location: {eventData.location}</p>
       <p>Created at: {getFormattedEventDate()}</p>
       <div className={Style.buttons}>
         <button onClick={handleDeleteEvent}>Delete</button>
